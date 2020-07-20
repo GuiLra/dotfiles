@@ -1,0 +1,123 @@
+# General
+font pango:Hasklug Nerd Font Mono 9
+
+# Gaps
+for_window [class=".*"] border pixel 0 
+gaps inner 4
+gaps outer  0 
+
+
+# to drag floating windows to their wanted position
+floating_modifier mod1
+
+# kill focused window
+bindsym mod4+Shift+q kill
+
+# change focus
+bindsym mod1+h focus left
+bindsym mod1+j focus down
+bindsym mod1+k focus up
+bindsym mod1+l focus right
+
+# move focused window
+bindsym mod1+Shift+h move left
+bindsym mod1+Shift+j move down
+bindsym mod1+Shift+k move up
+bindsym mod1+Shift+l move right
+
+# split in horizontal orientation
+bindsym mod4+u split h
+
+# split in vertical orientation
+bindsym mod4+i split v
+
+# enter fullscreen mode for the focused container
+bindsym mod4+f fullscreen toggle
+
+# toggle tiling / floating
+bindsym mod4+Shift+space floating toggle 
+
+# change focus between tiling / floating windows
+bindsym mod4+space focus mode_toggle
+
+# Workspace
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+
+# switch to workspace
+bindsym mod1+1 	workspace number $ws1
+bindsym mod1+2	workspace number $ws2
+bindsym mod1+3 	workspace number $ws3	
+bindsym mod1+4 	workspace number $ws4
+bindsym mod1+5	workspace number $ws5
+
+# throw to workspack
+bindsym mod1+Shift+1	move container to workspace number $ws1
+bindsym mod1+Shift+2 	move container to workspace number $ws2
+bindsym mod1+Shift+3 	move container to workspace number $ws3
+bindsym mod1+Shift+4	move container to workspace number $ws4
+bindsym mod1+Shift+5	move container to workspace number $ws5
+
+# throw and follow
+bindsym mod1+Ctrl+1	move to container to workspace number $ws1; workspace number $ws1
+bindsym mod1+Ctrl+2	move to container to workspace number $ws2; workspace number $ws2
+bindsym mod1+Ctrl+3	move to container to workspace number $ws3; workspace number $ws3
+bindsym mod1+Ctrl+4	move to container to workspace number $ws4; workspace number $ws4
+bindsym mod1+Ctrl+5	move to container to workspace number $ws5; workspace number $ws5
+
+# reload the configuration file
+bindsym mod4+Shift+c reload
+
+# restart i3 
+bindsym mod4+Shift+r restart
+
+# exit i3 
+bindsym mod4+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+	# Resize the focused window
+	bindsym h resize shrink width 10 px or 1 ppt
+	bindsym j resize grow height 10 px or 1 ppt
+	bindsym k resize shrink height 10 px or 1 ppt
+	bindsym l resize grow width 10 px or 1 ppt
+
+	# Resize the focused window more
+	bindsym Shift+h resize shrink width 50 px or 5 ppt
+	bindsym Shift+j resize grow height 50 px or 5 ppt
+	bindsym Shift+k resize shrink height 50 px or 5 ppt
+	bindsym Shift+l resize grow width 50 px or 5 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+}
+
+bindsym mod4+r mode "resize"
+
+# Application
+bindsym mod4+k 		exec brave
+bindsym mod4+g  	exec firefox
+bindsym mod4+Return	exec tilix
+bindsym mod4+d		exec discord
+bindsym mod4+y		exec deluge
+bindsym mod4+v 		exec vlc
+bindsym mod4+p		exec flameshot
+bindsym mod4+s		exec spotify
+bindsym mod4+a		exec reboot
+bindsym mod4+l 		exec poweroff
+bindsym mod4+m		exec gucharmap
+
+# Polybar
+exec polybar -r example
+
+# Wallpaper
+exec --no-startup-id feh --bg-fill ~/Wallpaper/florest1.jpg
+
+# Wifi
+exec nm-applet
