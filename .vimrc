@@ -22,8 +22,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'PotatoesMaster/i3-vim-syntax'                " i3 config highlighting
     Plug 'kovetskiy/sxhkd-vim'                         " sxhkd highlighting
     Plug 'ap/vim-css-color'                            " Color previews for CSS
-" Theme 
-    Plug 'morhetz/gruvbox'
 " Junegunn Choi Plugins
     Plug 'junegunn/goyo.vim'                           " Distraction-free viewing
     Plug 'junegunn/limelight.vim'                      " Hyperfocus on a range
