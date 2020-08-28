@@ -1,3 +1,3 @@
 #  ~/.*🖤
 
-### Preview: ![Screenshot](image.png) 
+### Preview: ![Screenshot](screenshot.png) 
