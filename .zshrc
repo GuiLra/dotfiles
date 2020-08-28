@@ -27,7 +27,7 @@ SPACESHIP_PROMPT_ADD_NEWLINE=false
 SPACESHIP_CHAR_SYMBOL="➜ "
 SPACESHIP_CHAR_SUFFIX=" "
 
-### Added by Zinit's installer
+# Added by Zinit's installer 
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
     command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
@@ -39,15 +39,23 @@ fi
 source "$HOME/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
-### End of Zinit's installer chunk
+# End of Zinit's installer chunk 
 
 # Zinit
 zinit light zdharma/fast-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 
-# ALIAS
-alias w="sudo wifi-menu"
-alias g="googler"
+# Aliases
+alias open="xdg-open"
+alias e="~/Experiments"
 alias v="vim"
 alias vw="viewnior"
+alias w="~/.wallpapers"
+alias t="tmux"
+alias d="~/Downloads"
+
+# Setting up Defaults
+export BROWSER='brave'
+export EDITOR='vim' 
+export TERMINAL='tilix'
