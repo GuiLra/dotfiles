@@ -1,33 +1,31 @@
 set nocompatible              " be iMproved, required
 filetype plugin on
-
+										
 call plug#begin('~/.vim/plugged')
 
 " The Basics 
-    Plug 'itchyny/lightline.vim'                       " Lightline statusbar
     Plug 'suan/vim-instant-markdown', {'for': 'markdown'} " Markdown Preview
     Plug 'frazrepo/vim-rainbow'
     Plug 'airblade/vim-gitgutter'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+    Plug 'itchyny/lightline.vim'                       " Lightline statusbar
 " File management 
-    Plug 'scrooloose/nerdtree'                         " Nerdtree
+    Plug 'preservim/nerdtree'                         " Nerdtree
     Plug 'tiagofumo/vim-nerdtree-syntax-highlight'     " Highlighting Nerdtree
     Plug 'ryanoasis/vim-devicons'                      " Icons for Nerdtree
 " Productivity 
     Plug 'vimwiki/vimwiki'                             " VimWiki 
     Plug 'jreybert/vimagit'                            " Magit-like plugin for vim
-    Plug 'prettier/vim-prettier'
 " Tim Pope Plugins 
     Plug 'tpope/vim-surround'                          " Change surrounding marks
 " Syntax Highlighting and Colors
     Plug 'PotatoesMaster/i3-vim-syntax'                " i3 config highlighting
     Plug 'kovetskiy/sxhkd-vim'                         " sxhkd highlighting
     Plug 'ap/vim-css-color'                            " Color previews for CSS
-" Junegunn Choi Plugins
-    Plug 'junegunn/goyo.vim'                           " Distraction-free viewing
-    Plug 'junegunn/limelight.vim'                      " Hyperfocus on a range
-    Plug 'junegunn/vim-emoji'                          " Vim needs emojis!
 " Intellisense  
     Plug 'zxqfl/tabnine-vim'
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
@@ -38,20 +36,25 @@ set incsearch                   " Incremental search
 set hidden                      " Needed to keep multiple buffers open
 set nobackup                    " No auto backups
 set noswapfile                  " No swap
+set autochdir
+set tabstop=2 softtabstop=2 shiftwidth=2 noexpandtab
+set renderoptions=type:directx
 set clipboard=unnamedplus       " Copy/paste between vim and other programs.
-set  number relativenumber
+set number relativenumber
+
+" Color Settings 
+packadd! omni
+colorscheme omni
 syntax enable
+set bg=dark cursorline termguicolors
 
-
-" Status Line
-" The lightline.vim theme
+" Theme lightline
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
+      \ 'colorscheme': 'omni',
       \ }
 
 " Always show statusline
 set laststatus=2
-
 
 " NERDTree
 " Uncomment to autostart the NERDTree
@@ -83,19 +86,20 @@ xnoremap K :move '<-2<CR>gv-gv
 xnoremap J :move '>+2<CR>gv-gv
 
 map q :quit<CR>
-map <C-m> :Lex!<CR>
 map <C-v> :vsplit<CR>
 
 nnoremap <Up>    :resize +2<CR>
 nnoremap <Down>  :resize -2<CR>
 nnoremap <Left>  :vertical resize +2<CR>
 nnoremap <Right> :vertical resize -2<CR>
+nmap <C-p> :Files<CR>
 
-" Color Settings 
-colorscheme gruvbox
-set bg=dark cursorline termguicolors
 
-" open NERDTree when no file is to be opened at sratup
+" Open NERDTree when no file is to be opened at sratup 
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" }}}
+
+autocmd VimEnter *
+  \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \|   PlugInstall --sync | q
+  \| endif
